@@ -1,8 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { users } from './users.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
+import { users } from "./users.entity";
 
 @Entity()
-export class direciones {
+export class direcciones {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -12,6 +12,9 @@ export class direciones {
   @Column()
   userId: number;
 
-  @ManyToOne(type => users, users => users.userDir)
+  @ManyToOne(
+    type => users,
+    users => users.userDir
+  )
   user: users;
 }

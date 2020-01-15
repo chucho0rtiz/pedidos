@@ -1,45 +1,49 @@
-import { Controller, Post, Body, Get, Patch, Param, HttpException, HttpStatus, Delete } from '@nestjs/common';
-import { userService } from '../service/User.service';
-import { userCrearDto } from '../dto/user-crear.dto';
-import { userUpdateDto } from '../dto/user-update.dto';
-import { personaService } from '../service/persona.service';
-import { personaCrearDto } from '../dto/persona-crear.dto';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Patch,
+  Param,
+  HttpException,
+  HttpStatus,
+  Delete
+} from "@nestjs/common";
+import { userService } from "../service/User.service";
+import { userCrearDto } from "../dto/user-crear.dto";
+import { userUpdateDto } from "../dto/user-update.dto";
+import { ApiTags } from "@nestjs/swagger";
 
-@Controller('user')
+@ApiTags("users")
+@Controller("user")
 export class UserController {
-    constructor(private userService : userService, 
-        private personaService : personaService){
+  constructor(private userService: userService) {}
 
-    }
+  @Post()
+  gurdar(@Body() userCrearDto: userCrearDto): any {
+    return this.userService.guardar(userCrearDto);
+  }
 
-    @Post()
-    // gurdar(@Body() userCrearDto : userCrearDto, @Body() personaCrearDto : personaCrearDto) : any{
-    gurdar(@Body() userCrearDto : userCrearDto) : any{
-        // this.personaService.guardar(personaCrearDto)
-        return this.userService.guardar(userCrearDto);
-    }
+  @Get(":id")
+  buscar(@Param("id") id: number): any {
+    return this.userService.buscar(id);
+  }
 
-    @Get(":id")
-    buscar(@Param("id") id: number) :any{
-        // this.personaService.buscar(id);
-        return this.userService.buscar(id);
-    }
+  @Get()
+  listar() {
+    return this.userService.listar();
+  }
 
-    @Get()
-    listar(){
-        return this.userService.listar();
-    }
-
-    @Patch(":id")
-    modificar(@Param("id") id : number, 
+  @Patch(":id")
+  modificar(
+    @Param("id") id: number,
     @Body() userUpdateDto: userUpdateDto
-    ) : any{
-        return this.userService.modificar(id,userUpdateDto);
-    }
+  ): any {
+    return this.userService.modificar(id, userUpdateDto);
+  }
 
-    @Delete(":id")
-    eliminar(@Param("id") id : number){
-        return this.userService.eliminar(id);
-    }
-
+  @Delete(":id")
+  eliminar(@Param("id") id: number) {
+    return this.userService.eliminar(id);
+  }
 }

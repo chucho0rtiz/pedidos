@@ -5,8 +5,7 @@ import {
   OneToMany,
   OneToOne
 } from "typeorm";
-import { direciones } from "./direcciones.entity";
-import { personas } from "./personas.entity";
+import { direcciones } from "./direcciones.entity";
 import { tareas } from "./tareas.entity";
 import { pedidos } from "./pedidos.entity";
 
@@ -15,23 +14,26 @@ export class users {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ nullable: false, unique: true })
   userName: string;
+
+  @Column({ nullable: false, unique: true })
+  email: string;
 
   @Column()
   password: string;
 
-  @Column({ nullable: false, default: "Cliente" })
+  @Column({ default: "Cliente" })
   rol: string;
 
-  @Column({ nullable: false, default: 1 })
+  @Column({ default: 1 })
   estado: number;
 
   @OneToMany(
-    type => direciones,
+    type => direcciones,
     direcciones => direcciones.user
   )
-  userDir: direciones[];
+  userDir: direcciones[];
 
   @OneToMany(
     type => tareas,

@@ -20,11 +20,11 @@ import { direccionesModule } from "./direcciones/direcciones.module";
     direccionesModule,
     TypeOrmModule.forRoot({
       type: "mysql",
-      host: "localhost",
+      host: "db4free.net",
       port: 3306,
-      username: "root",
-      password: "",
-      database: "pedidos",
+      username: "pedidosapi",
+      password: "pedidosapi",
+      database: "pedidosapi",
       entities: [users, direcciones, tareas, pedidos],
       synchronize: true
     }) //, AuthModule

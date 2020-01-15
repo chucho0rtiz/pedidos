@@ -10,7 +10,6 @@ import { direcciones } from "./entitys/direcciones.entity";
 import { tareas } from "./entitys/tareas.entity";
 import { pedidos } from "./entitys/pedidos.entity";
 import { direccionesModule } from "./direcciones/direcciones.module";
-// import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -27,7 +26,7 @@ import { direccionesModule } from "./direcciones/direcciones.module";
       database: "pedidosapi",
       entities: [users, direcciones, tareas, pedidos],
       synchronize: true
-    }) //, AuthModule
+    })
   ],
   controllers: [AppController],
   providers: [AppService]
